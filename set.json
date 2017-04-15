@@ -1,0 +1,26 @@
+[
+	{
+		"itemNumber" : "100.101.568",
+		"appelation" : "monitor",
+		"quantity" : "20",
+		"storage" : "3-2-5"
+	},
+	{
+		"itemNumber" : "100.101.614",
+		"appelation" : "keyboard",
+		"quantity" : "35",
+		"storage" : "3-2-6"
+	},
+	{
+		"itemNumber" : "100.101.984",
+		"appelation" : "mouse",
+		"quantity" : "12",
+		"storage" : "3-2-4"
+	},
+	{
+		"itemNumber" : "100.101.328",
+		"appelation" : "cd",
+		"quantity" : "56",
+		"storage" : "3-2-2"
+	}
+]
