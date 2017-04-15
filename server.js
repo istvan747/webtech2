@@ -20,18 +20,19 @@ app.post("/addItem",function(req,res){
 		}
 		console.log("Data writen is successfully!");
 	});
+	res.send("");
 });
 
-app.get("/deleteItem",function(req,res){
+app.get("/deleteitem",function(req,res){
 	if(req.query == undefined){
 		return;
 	}
-	if(req.query["itemNumber"] == undefined){
+	if(req.query["itemnumber"] == undefined){
 		return;
 	}
-
+	console.log("delete is run ...");
 	var items = JSON.parse(fs.readFileSync(__dirname+"/set.json"));
-	items = items.filter(function(item){ return item.itemNumber != req.query['itemNumber'] });
+	items = items.filter(function(item){ return item.itemNumber != req.query['itemnumber'] });
 	console.log("Data delete is successfully!");
 	fs.writeFile(__dirname+"/set.json",JSON.stringify(items),function(err){
 		if(err){
@@ -39,6 +40,7 @@ app.get("/deleteItem",function(req,res){
 		}
 		console.log("Data writen is successfully!");
 	});
+	res.send("");
 });
 
 app.get("/updateItem",function(req,res){
