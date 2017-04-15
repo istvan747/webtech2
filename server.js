@@ -42,11 +42,12 @@ app.get("/deleteItem",function(req,res){
 });
 
 app.get("/updateItem",function(req,res){
-		
+
 });
 
 app.get("/listItem",function(req,res){
-	
+	var items = JSON.parse(fs.readFileSync(__dirname+"/set.json"));
+	res.send(items);	
 });
 
 var server = app.listen(8081, function(){
