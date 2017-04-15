@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 <head>
-	<meta charset="utf-8">
 	<title>Storage</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" rel="stylesheet" href="css/style.css"></link>	
 </head>
 <body>
-	<p>Hello world from index.html!</p>
+	<div class="container-fluid">
+	 	<div class="jumbotron">
+    		<h1>Storage System</h1>
+    		<p>the world's best warehouse management system.</p>
+  		</div>
+		<nav class="navbar navbar-inverse">
+  			<div class="container-fluid">
+	    		<div class="navbar-header">
+	      			<a class="navbar-brand" href="#">Storage</a>
+	    		</div>
+	    		<ul class="nav navbar-nav">
+	      			<li class="active"><a href="#">list items</a></li>
+	     			<li><a href="#">add items</a></li>
+	    		</ul>
+	    		<form class="navbar-form navbar-left">
+	      			<div class="form-group">
+	        			<input type="text" class="form-control" placeholder="Search">
+	      			</div>
+	      			<button type="submit" class="btn btn-default">Submit</button>
+	    		</form>
+  			</div>
+		</nav>
+		<div class="row">
+		 	<div class="col-md-2">
+		 		<div class="row">
+		 			<div class="col-md-12">
+ 						<button type="button" class="btn btn-primary btn-block">Button 1</button>
+ 					</div>
+		 		</div>	
+		 		<div class="row">
+	 				<div class="col-md-12">
+ 						<button type="button" class="btn btn-primary btn-block">Button 1</button>
+ 					</div>	 			
+		 		</div>
+		 	</div>
+			<div class="col-md-10">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>item number</th>
+							<th>appelation</th>
+							<th>quantity</th>
+							<th>storage</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>John</td>
+							<td>Doe</td>
+							<td>john@example.com</td>
+							<td>john@example.com</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>	
 </body>
 </html>
