@@ -3,11 +3,13 @@
 <head>
 	<title>Storage</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link type="text/css" rel="stylesheet" href="css/style.css"></link>	
+	<script src="js/angularJS.v1.6.4.js"></script>
 </head>
-<body>
-	<div class="container-fluid">
+<body ng-app="myApp" ng-controller="myController">
+
+	<div class="container-fluid" >
 	 	<div class="jumbotron">
     		<h1>Storage System</h1>
     		<p>the world's best warehouse management system.</p>
@@ -23,9 +25,8 @@
 	    		</ul>
 	    		<form class="navbar-form navbar-left">
 	      			<div class="form-group">
-	        			<input type="text" class="form-control" placeholder="Search">
+	        			<input type="text" class="form-control" placeholder="Search" ng-model="search">
 	      			</div>
-	      			<button type="submit" class="btn btn-default">Submit</button>
 	    		</form>
   			</div>
 		</nav>
@@ -53,16 +54,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>John</td>
-							<td>Doe</td>
-							<td>john@example.com</td>
-							<td>john@example.com</td>
+						<tr ng-repeat="item in items | filter: search">
+							<td>{{item.itemNumber}}</td>
+							<td>{{item.appelation}}</td>
+							<td>{{item.quantity}}</td>
+							<td>{{item.storage}}</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		<span>{{test}}</span>
 	</div>	
+	<script src="js/myApp.js"></script>
 </body>
 </html>
