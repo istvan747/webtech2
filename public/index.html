@@ -16,6 +16,9 @@
     		<h1>Storage System</h1>
     		<p>the world's best warehouse management system.</p>
   		</div>
+
+<!--**************************************** navbar  *************************************** -->
+
 		<nav class="navbar navbar-inverse">
   			<div class="container-fluid">
 	    		<div class="navbar-header">
@@ -23,7 +26,7 @@
 	    		</div>
 	    		<ul class="nav navbar-nav">
 	      			<li class="active"><a href="" ng-click="listItem()">list items</a></li>
-	     			<li ><a href="#" data-toggle="modal" data-target="#myModal" >add items</a></li>
+	     			<li ><a href="#" data-toggle="modal" data-target="#newIttemDialog" >add items</a></li>
 	    		</ul>
 	    		<form class="navbar-form navbar-left">
 	      			<div class="form-group">
@@ -47,9 +50,9 @@
 		 	</div>
 			<div class="col-md-10">
 
-<!--**************************************** MODAL dialog window *************************************** -->
+<!--**************************************** New Item dialog window *************************************** -->
 
-				<div id="myModal" class="modal fade" role="dialog">
+				<div id="newIttemDialog" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -59,43 +62,100 @@
 							<div class="modal-body">
 								<form class="form-horizontal">
 
-									<div class="form-group">
+									<div class="form-group itemnumberFieldDiv" >
 										<label class="control-label col-sm-2" for="itemnumber">item&nbsp;number:</label>
 										<div class="col-sm-10">
-											<input type="text" ng-model="itemNumber" class="form-control" id="itemNumber" placeholder="Enter item number">
+											<input type="text" ng-model="item.itemNumber" class="form-control" id="itemNumber" placeholder="Enter item number" required/>
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group appelationFieldDiv" >
 										<label class="control-label col-sm-2" for="appelation">appelation:</label>
 										<div class="col-sm-10">
-											<input type="text" ng-model="appelation" class="form-control" id="appelation" placeholder="Enter appelation">
+											<input type="text" ng-model="item.appelation" class="form-control" id="appelation" placeholder="Enter appelation" required />
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group quantityFieldDiv" >
 										<label class="control-label col-sm-2" for="quantity">quantity:</label>
 										<div class="col-sm-10">
-											<input type="text" ng-model="quantity" class="form-control" id="quantity" placeholder="Enter quantity">
+											<input type="text" ng-model="item.quantity" class="form-control" id="quantity" placeholder="Enter quantity" required />
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group storageFieldDiv" >
 										<label class="control-label col-sm-2" for="storage">storage:</label>
 										<div class="col-sm-10">
-											<input type="text" ng-model="storage" class="form-control" id="storage" placeholder="Enter storage">
+											<input type="text" ng-model="item.storage" class="form-control" id="storage" placeholder="Enter storage" required />
 										</div>
 									</div>						
 									
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-											<button type="submit" ng-click="saveItem()" class="btn btn-default" data-dismiss="modal" >Submit</button>
+											<button type="submit" ng-click="addItem()" class="btn btn-default"  >Submit</button>
 										</div>
 									</div>
 								</form>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" ng-click="unSelectItem()" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+<!--**************************************** update, delete ittem dialog window *************************************** -->
+
+				<div id="updateDeleteIttem" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">update, delete item</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal">
+
+									<div class="form-group itemnumberFieldDiv">
+										<label class="control-label col-sm-2" for="itemnumber">item&nbsp;number:</label>
+										<div class="col-sm-10">
+											<input type="text" ng-model="item.itemNumber" value="{{item.itemNumber}}" class="form-control" placeholder="Enter item number"  disabled>
+										</div>
+									</div>
+
+									<div class="form-group appelationFieldDiv">
+										<label class="control-label col-sm-2" for="appelation">appelation:</label>
+										<div class="col-sm-10">
+											<input type="text" ng-model="item.appelation" value={{item.appelation}} class="form-control" placeholder="Enter appelation">
+										</div>
+									</div>
+
+									<div class="form-group quantityFieldDiv">
+										<label class="control-label col-sm-2" for="quantity">quantity:</label>
+										<div class="col-sm-10">
+											<input type="text" ng-model="item.quantity" value={{item.quantity}} class="form-control" placeholder="Enter quantity">
+										</div>
+									</div>
+
+									<div class="form-group storageFieldDiv">
+										<label class="control-label col-sm-2" for="storage">storage:</label>
+										<div class="col-sm-10">
+											<input type="text" ng-model="item.storage" value={{item.storage}} class="form-control" placeholder="Enter storage">
+										</div>
+									</div>						
+									
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<div class="btn-group btn-group-justified">
+												<a href="#" class="btn btn-primary" id="updateButton" ng-click="updateItem()">update</a>
+												<a href="#" data-dismiss="modal" class="btn btn-primary" ng-click="deleteItem()" >delete</a>
+											</div>											
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" ng-click="unSelectItem()" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
@@ -113,7 +173,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="item in items | filter: search">
+						<tr ng-repeat="item in items | filter: search" ng-click= "selectItem(item)" data-toggle="modal" data-target="#updateDeleteIttem"   >
 							<td>{{item.itemNumber}}</td>
 							<td>{{item.appelation}}</td>
 							<td>{{item.quantity}}</td>
