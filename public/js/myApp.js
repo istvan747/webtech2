@@ -3,7 +3,16 @@ var app = angular.module("myApp", []);
 app.controller("myController", function($scope,$http){
 	
 	$scope.item = new Object();
-	//$scope.items;
+
+	var itemNumberField = document.getElementsByClassName("itemnumberFieldDiv");
+	var appelationField = document.getElementsByClassName("appelationFieldDiv");
+	var quantityField = document.getElementsByClassName("quantityFieldDiv");
+	var storageField = document.getElementsByClassName("storageFieldDiv");
+	var itemNumberExists = false;
+	var itemNumberEmpty = false;
+	var appelationEmpty = false;
+	var quantityEmpty = false;
+	var storageEmpty = false;
 
 	$scope.listItem = function(){
 		$http.get("/listItem").then(function(resp){
@@ -13,19 +22,7 @@ app.controller("myController", function($scope,$http){
 
 	$scope.listItem();
 
-	$scope.formValid = function(form, classIndex){
-		
-		var itemNumberField = document.getElementsByClassName("itemnumberFieldDiv");
-		var appelationField = document.getElementsByClassName("appelationFieldDiv");
-		var quantityField = document.getElementsByClassName("quantityFieldDiv");
-		var storageField = document.getElementsByClassName("storageFieldDiv");
-
-		var itemNumberExists = false;
-		var itemNumberEmpty = false;
-		var appelationEmpty = false;
-		var quantityEmpty = false;
-		var storageEmpty = false;
-
+	$scope.formValid = function(form, index){
 		if(form != "updateItem"){
 			$scope.listItem();
 			for(i in $scope.items){
@@ -37,59 +34,83 @@ app.controller("myController", function($scope,$http){
 		}
 
 		if(itemNumberExists){
-			itemNumberField[classIndex].className += " has-error";
-			itemNumberField[classIndex].setAttribute("toggle", "popover");
-			itemNumberField[classIndex].setAttribute("title", "Item number is exists!");			
+			itemNumberField[index].className += " has-error";
+			itemNumberField[index].setAttribute("toggle", "popover");
+			itemNumberField[index].setAttribute("title", "Item number is exists!");			
 		}else if($scope.item.itemNumber == undefined || $scope.item.itemNumber == ""){
 			itemNumberEmpty = true;
-			itemNumberField[classIndex].className += " has-error";
-			itemNumberField[classIndex].setAttribute("toggle", "popover");
-			itemNumberField[classIndex].setAttribute("title", "Item number is exists!");
+			itemNumberField[index].className += " has-error";
+			itemNumberField[index].setAttribute("toggle", "popover");
+			itemNumberField[index].setAttribute("title", "Item number is exists!");
 		}else{
 			itemNumberEmpty = false;
 			itemNumberExists = false;
-			itemNumberField[classIndex].removeAttribute("toggle");
-			itemNumberField[classIndex].removeAttribute("title");
-			itemNumberField[classIndex].classList.remove("has-error");
+			itemNumberField[index].removeAttribute("toggle");
+			itemNumberField[index].removeAttribute("title");
+			itemNumberField[index].classList.remove("has-error");
 		}
 
 		if($scope.item.appelation == undefined || $scope.item.appelation ==""){
 			appelationEmpty = true;
-			appelationField[classIndex].className += " has-error";
-			appelationField[classIndex].setAttribute("toggle", "popover");
-			appelationField[classIndex].setAttribute("title", "Appelation field is empty!");
+			appelationField[index].className += " has-error";
+			appelationField[index].setAttribute("toggle", "popover");
+			appelationField[index].setAttribute("title", "Appelation field is empty!");
 		}else{
 			appelationEmpty = false;
-			appelationField[classIndex].removeAttribute("toggle");
-			appelationField[classIndex].removeAttribute("title");
-			appelationField[classIndex].classList.remove("has-error");
+			appelationField[index].removeAttribute("toggle");
+			appelationField[index].removeAttribute("title");
+			appelationField[index].classList.remove("has-error");
 		}
 
 		if($scope.item.quantity == undefined || $scope.item.quantity == ""){
 			quantityEmpty = true;
-			quantityField[classIndex].className += " has-error";
-			quantityField[classIndex].setAttribute("toggle", "popover");
-			quantityField[classIndex].setAttribute("title", "Quantity field is empty!");
+			quantityField[index].className += " has-error";
+			quantityField[index].setAttribute("toggle", "popover");
+			quantityField[index].setAttribute("title", "Quantity field is empty!");
 		}else{
 			quantityEmpty = false;
-			quantityField[classIndex].removeAttribute("toggle");
-			quantityField[classIndex].removeAttribute("title");
-			quantityField[classIndex].classList.remove("has-error");
+			quantityField[index].removeAttribute("toggle");
+			quantityField[index].removeAttribute("title");
+			quantityField[index].classList.remove("has-error");
 		}
 
 		if($scope.item.storage == undefined || $scope.item.storage == ""){
 			storageEmpty = true;
-			storageField[classIndex].className += " has-error";
-			storageField[classIndex].setAttribute("toggle", "popover");
-			storageField[classIndex].setAttribute("title", "Storage field is empty!");
+			storageField[index].className += " has-error";
+			storageField[index].setAttribute("toggle", "popover");
+			storageField[index].setAttribute("title", "Storage field is empty!");
 		}else{
 			storageEmpty = false;
-			storageField[classIndex].removeAttribute("toggle");
-			storageField[classIndex].removeAttribute("title");
-			storageField[classIndex].classList.remove("has-error");
+			storageField[index].removeAttribute("toggle");
+			storageField[index].removeAttribute("title");
+			storageField[index].classList.remove("has-error");
 		}
 
 		return !itemNumberExists && !itemNumberEmpty && !appelationEmpty && !quantityEmpty && !storageEmpty;
+	}
+
+	$scope.removeError = function(index){
+			itemNumberEmpty = false;
+			itemNumberExists = false;
+			itemNumberField[index].removeAttribute("toggle");
+			itemNumberField[index].removeAttribute("title");
+			itemNumberField[index].classList.remove("has-error");
+			appelationEmpty = false;
+			appelationField[index].removeAttribute("toggle");
+			appelationField[index].removeAttribute("title");
+			appelationField[index].classList.remove("has-error");
+			quantityEmpty = false;
+			quantityField[index].removeAttribute("toggle");
+			quantityField[index].removeAttribute("title");
+			quantityField[index].classList.remove("has-error");
+			storageEmpty = false;
+			storageField[index].removeAttribute("toggle");
+			storageField[index].removeAttribute("title");
+			storageField[index].classList.remove("has-error");
+	}
+
+	$scope.orderBy = function(o){
+		$scope.order = o;
 	}
 
 	$scope.addItem = function(){
@@ -109,10 +130,14 @@ app.controller("myController", function($scope,$http){
 	};
 
 	$scope.unSelectItem = function(){
-		$scope.item.itemNumber = "";
-		$scope.item.appelation = "";
-		$scope.item.quantity = "";
-		$scope.item.storage = "";
+		$scope.item = undefined;
+		$scope.item = {
+			itemNumber : "",
+			appelation : "",
+			quantity : "",
+			storage : ""
+		}
+
 	}
 
 	$scope.deleteItem = function(){
